@@ -14,9 +14,9 @@ private let reuseIdentifier = "Cell"
 class FilterCollectionViewController: UICollectionViewController {
 	
 	var collectionAssets = [PHAsset]()
-	var imagePublishSubject = PublishSubject<UIImage>()
-	var imageObservable: Observable<UIImage> {
-		return imagePublishSubject.asObservable()
+	var subjectImage = PublishSubject<UIImage>()
+	var obersableImage: Observable<UIImage> {
+		return subjectImage.asObservable()
 	}
 	
 	
@@ -90,24 +90,26 @@ class FilterCollectionViewController: UICollectionViewController {
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let asset = collectionAssets[indexPath.row]
-		PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: nil) {[weak self] image,info in
+		let selectedAsset = collectionAssets[indexPath.row]
+		
+		PHImageManager.default().requestImage(for: selectedAsset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: nil) { image, info in
 			
-			guard let info = info else {return }
+			guard let info = info else {return}
 			
-			let isDegredImage = info["PHImageResultIsDegradeKey"] as! Bool
+			// pode retornar uma image com baixa qualidade
+			let isDegradedImage = info["PHImageResultIsDegradedKey"] as! Bool
 			
-			if !isDegredImage  {
+			if !isDegradedImage {
 				
 				if let image = image {
-					self?.imagePublishSubject.onNext(image)
-					self?.dismiss(animated: true, completion: nil)
-					
+					self.subjectImage.onNext(image)
+					self.dismiss(animated: true, completion: nil)
 				}
 				
 			}
 			
-		} }
-	
+		}
+		
+	}
 }
 
