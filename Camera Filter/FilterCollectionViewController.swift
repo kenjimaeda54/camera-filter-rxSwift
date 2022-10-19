@@ -28,12 +28,19 @@ class FilterCollectionViewController: UICollectionViewController {
 		PHPhotoLibrary.requestAuthorization {[weak self] (status) in
 			if status == .authorized  {
 				let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
+				
 				assets.enumerateObjects { (object, inbdex, stop) in
 					self?.collectionAssets.append(object)
+					
 				}
+				
 				//mais recentes em primerio
 				self?.collectionAssets.reverse()
-				print(self?.collectionAssets)
+				
+				DispatchQueue.main.async {
+					self?.collectionView.reloadData()
+				}
+				
 			}
 		}
 		
@@ -52,20 +59,28 @@ class FilterCollectionViewController: UICollectionViewController {
 	// MARK: UICollectionViewDataSource
 	
 	override func numberOfSections(in collectionView: UICollectionView) -> Int {
-		// #warning Incomplete implementation, return the number of sections
-		return 0
+		return 1
 	}
 	
 	
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		// #warning Incomplete implementation, return the number of items
-		return 0
+		return collectionAssets.count
 	}
 	
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+		guard	let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? PhotosCollectionViewCell  else { fatalError("PhotosCollectionViewCell dont existe") }
 		
-		// Configure the cell
+		let asset = collectionAssets[indexPath.row]
+		let manager = PHImageManager()
+		
+		//assincrono request por isso dispatchQueue
+		//estou fazendo a requisicao de cada foto e colocando na img photo
+		manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFit, options: nil) { image, _ in
+			
+			DispatchQueue.main.async {
+				cell.imgPhoto.image = image
+			}
+		}
 		
 		return cell
 	}

@@ -63,20 +63,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DXP-Hq-xkL">
-                            <size key="itemSize" width="128" height="128"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DXP-Hq-xkL">
+                            <size key="itemSize" width="100" height="100"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="o6e-Qm-L8L">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="o6e-Qm-L8L" customClass="PhotosCollectionViewCell" customModule="Camera_Filter" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zLf-bm-FKu">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CeP-Lv-890">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="6cw-jl-cMS"/>
+                                                <constraint firstAttribute="width" constant="100" id="i9E-yo-5Wl"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="CeP-Lv-890" secondAttribute="bottom" id="6Qi-Nj-IjI"/>
+                                        <constraint firstAttribute="trailing" secondItem="CeP-Lv-890" secondAttribute="trailing" id="87f-vH-pWF"/>
+                                        <constraint firstItem="CeP-Lv-890" firstAttribute="leading" secondItem="zLf-bm-FKu" secondAttribute="leading" id="GMg-l6-NTG"/>
+                                        <constraint firstItem="CeP-Lv-890" firstAttribute="leading" secondItem="zLf-bm-FKu" secondAttribute="leading" id="YBd-a8-smy"/>
+                                        <constraint firstItem="CeP-Lv-890" firstAttribute="top" secondItem="zLf-bm-FKu" secondAttribute="top" id="dev-fO-C3K"/>
+                                        <constraint firstItem="CeP-Lv-890" firstAttribute="height" secondItem="zLf-bm-FKu" secondAttribute="height" id="pct-ga-UG9"/>
+                                        <constraint firstItem="CeP-Lv-890" firstAttribute="top" secondItem="zLf-bm-FKu" secondAttribute="top" id="yXX-xs-YIS"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imgPhoto" destination="CeP-Lv-890" id="Kad-uE-4De"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
