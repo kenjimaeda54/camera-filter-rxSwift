@@ -22,7 +22,7 @@ var observable: Observable<UIImage> {
 }
 	
 override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let selectedAsset = collectionAssets[indexPath.row]
+	let selectedAsset = collectionAssets[indexPath.row]
 		
 		PHImageManager.default().requestImage(for: selectedAsset, targetSize: CGSize(width: 300, height: 300), contentMode: .aspectFill, options: nil) { image, info in
 			
