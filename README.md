@@ -3,7 +3,7 @@ Aplicativbo de camera com filtros de fotos
 
 
 ## Motivação
-Forltalecer conhecimentos em [RxSwift](https://github.com/ReactiveX/RxSwif)
+Fortalecer conhecimentos em [RxSwift](https://github.com/ReactiveX/RxSwif)
 
 
 - Feature
