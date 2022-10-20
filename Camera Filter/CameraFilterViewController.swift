@@ -25,15 +25,13 @@ class CameraFilterViewController: UIViewController {
 		
 		guard let sourceImage = self.imgContainer.image else {return}
 		
-		FilterService().applyFilter(sourceImage).subscribe(onNext:{ filterImaged in
+		FilterService().applyFilter(sourceImage).subscribe(onNext:{ filterImage in
 			
 			DispatchQueue.main.async {
-				self.imgContainer.image = filterImaged
+				self.imgContainer.image = filterImage
 			}
 			
 		}).disposed(by: disposedBag)
-		
-		
 	}
 	
 	
@@ -47,7 +45,7 @@ class CameraFilterViewController: UIViewController {
 			
 			self.updateUi(image)
 			
-			//			self.imgContainer.image = image
+			//self.imgContainer.image = image
 			
 		}).disposed(by: disposedBag)
 		

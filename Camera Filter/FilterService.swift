@@ -21,12 +21,13 @@ struct FilterService {
 	
 	func applyFilter(_ inputImage: UIImage) -> Observable<UIImage> {
 		
-		return  Observable.create { observer in
+		return Observable.create {observer  in
 			
-			self.applyFilter(inputImage) { imageFiltered in
+			self.applyFilter(inputImage) {imageFiltered in
+				
 				observer.onNext(imageFiltered)
+				
 			}
-			
 			return Disposables.create()
 			
 		}
@@ -35,22 +36,20 @@ struct FilterService {
 	
 	
 	private func applyFilter(_ inputImage: UIImage,_ completion: @escaping (UIImage)->Void) {
-		guard  let filter = CIFilter(name: "CICMYKHalftone") else {return}
+		guard let filter = CIFilter(name: "CICMYKHalftone") else {return}
 		filter.setValue(0.5, forKey: kCIInputWidthKey)
 		
 		if let sourceImage = CIImage(image: inputImage) {
 			filter.setValue(sourceImage, forKey: kCIInputImageKey)
 			
-			if let ciImg = self.ciContext.createCGImage(filter.outputImage!, from: filter.outputImage!.extent) {
+			if let ciImage = self.ciContext.createCGImage(filter.outputImage!, from: filter.outputImage!.extent) {
 				
-				let processedImage = UIImage(cgImage: ciImg, scale: inputImage.scale, orientation: inputImage.imageOrientation)
-				completion(processedImage)
+				let imageProcesed = UIImage(cgImage: ciImage, scale: inputImage.scale, orientation: inputImage.imageOrientation)
+				completion(imageProcesed)
 				
 			}
 			
 		}
-		
-		
 	}
 	
 }
