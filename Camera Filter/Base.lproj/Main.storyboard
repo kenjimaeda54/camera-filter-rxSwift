@@ -30,6 +30,9 @@
                                     <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="15"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="handlePressFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WYN-Ux-059"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -51,6 +54,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonApplyFilter" destination="ohb-AD-JW4" id="unV-BL-Brl"/>
                         <outlet property="imgContainer" destination="Vk5-TS-phP" id="oAR-mL-KU0"/>
                     </connections>
                 </viewController>

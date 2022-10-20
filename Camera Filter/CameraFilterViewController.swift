@@ -10,7 +10,10 @@ import RxSwift
 
 class CameraFilterViewController: UIViewController {
 	
+	@IBOutlet weak var buttonApplyFilter: UIButton!
 	@IBOutlet weak var imgContainer: UIImageView!
+	
+	
 	var disposedBag = DisposeBag()
 	
 	override func viewDidLoad() {
@@ -18,16 +21,43 @@ class CameraFilterViewController: UIViewController {
 		self.navigationController?.navigationBar.prefersLargeTitles = true
 	}
 	
+	@IBAction func handlePressFilter(_ sender: UIButton) {
+		
+		guard let sourceImage = self.imgContainer.image else {return}
+		
+		FilterService().applyFilter(sourceImage).subscribe(onNext:{ filterImaged in
+			
+			DispatchQueue.main.async {
+				self.imgContainer.image = filterImaged
+			}
+			
+		}).disposed(by: disposedBag)
+		
+		
+	}
+	
+	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		//sao duas view controller por isso foi feito dessa maneira
 		guard let vc = segue.destination as? UINavigationController,
-					let destination = vc.viewControllers.first as? FilterCollectionViewController else {fatalError("Cant acesses route")}
+					let destination = vc.viewControllers.first as? FilterCollectionViewController else {fatalError("dont existe route")}
 		
-		destination.obersableImage.subscribe(onNext: { [weak self] image in
-		     
-			self?.imgContainer.image = image
-	 
+		destination.observable.subscribe(onNext: { image in
+			
+			self.updateUi(image)
+			
+			//			self.imgContainer.image = image
+			
 		}).disposed(by: disposedBag)
-}
+		
+	}
+	
+	func updateUi(_ image: UIImage) {
+		
+		imgContainer.image = image
+		buttonApplyFilter.isHidden = false
+		
+	}
+	
 }

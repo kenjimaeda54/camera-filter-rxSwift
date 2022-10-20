@@ -15,7 +15,7 @@ class FilterCollectionViewController: UICollectionViewController {
 	
 	var collectionAssets = [PHAsset]()
 	var subjectImage = PublishSubject<UIImage>()
-	var obersableImage: Observable<UIImage> {
+	var observable: Observable<UIImage> {
 		return subjectImage.asObservable()
 	}
 	
@@ -33,8 +33,6 @@ class FilterCollectionViewController: UICollectionViewController {
 		//weak self e para garantir qeu nao ocorra memoria leak pois
 		//fetchAssets e assincrono
 		PHPhotoLibrary.requestAuthorization {[weak self] (status) in
-			print("entrei aqui")
-			
 			
 			if status == .authorized  {
 				let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
