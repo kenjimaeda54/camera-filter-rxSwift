@@ -1,6 +1,5 @@
 # Camera Filter
-Aplicativbo de camera com filtros de fotos
-
+Aplicativo de câmera com filtros de fotos
 
 ## Motivação
 Fortalecer conhecimentos em [RxSwift](https://github.com/ReactiveX/RxSwif)
