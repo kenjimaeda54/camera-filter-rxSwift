@@ -43,6 +43,7 @@ class CameraFilterViewController: UIViewController {
 		
 		destination.observable.subscribe(onNext: { image in
 			
+			
 			self.updateUi(image)
 			
 			//self.imgContainer.image = image
