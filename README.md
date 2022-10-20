@@ -13,7 +13,6 @@ Fortalecer conhecimentos em [RxSwift](https://github.com/ReactiveX/RxSwif)
 
 
 ```swift
-
 //FilterCollectionViewController
 
 var subjectImage = PublishSubject<UIImage>()
@@ -61,6 +60,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		}).disposed(by: disposedBag)
 		
 }
+
 	
 ```
 
