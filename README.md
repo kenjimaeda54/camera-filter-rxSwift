@@ -65,7 +65,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 ```
 
 ##
-- Criei uma lógica de observable também para aplicar os filtros nas imagens
+- Criei  lógica de observable também para aplicar os filtros nas imagens
 
 
 ```swift
